@@ -1,0 +1,1282 @@
+/* frontend/style.css */
+:root {
+  --color-bg: #f4f4f4;
+  --color-text: #333;
+  --color-primary: #1a1a1a;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+ body {
+  height: 100%;
+  margin: 0;
+  box-sizing: border-box;
+    /* 0 arriba y abajo, 1rem a izquierda y derecha */
+}
+
+.lista-link {
+ display: none;
+}
+
+
+/* ============================
+   HEADER (fijo en top)
+============================ */
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 80px;
+  background: #ddd;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  z-index: 1000;
+}
+header img {
+  height: 60px; /* ajusta el tamaño del logo */
+  width: auto; /* mantiene la proporción */
+}
+.main-nav {
+  display: flex;
+  gap: 1rem;
+}
+.nav-link {
+  background: var(--color-primary);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: transform 0.2s;
+}
+.nav-link:hover {
+  transform: scale(1.05);
+}
+
+/* Marca el enlace activo en el header */
+.main-nav .nav-link.active {
+  font-weight: bold;
+  border-bottom: 2px solid #A4C639;
+}
+
+
+/* ============================
+   BUSCADOR (en header)
+============================ */
+.search-container {
+  position: relative;
+  margin: 0 1rem;
+  flex: 1;
+  max-width: 400px;
+}
+#anime-search {
+  width: 100%;
+  padding: 0.5rem 2.5rem 0.5rem 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #999;
+  font-size: 1rem;
+}
+#anime-search::placeholder {
+  color: #666;
+}
+.search-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #666;
+}
+.autocomplete-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-top: none;
+  max-height: 200px;
+  overflow-y: auto;
+  display: none;
+  z-index: 1001;
+}
+.autocomplete-list li {
+  padding: 0.5rem;
+  cursor: pointer;
+  text-align: left;
+}
+.autocomplete-list li:hover {
+  background: #f0f0f0;
+}
+
+/* ============================
+   CONTENEDOR PRINCIPAL
+============================ */
+
+#app {
+  padding-top: 80px;
+  max-width: 1200px;
+  margin: 2rem auto;
+}
+/*nuevoooo---*/
+
+
+/* ============================
+GRID DE CARTAS (Anime/Manga)
+============================ */
+.grid-cards {
+  margin-top: 2rem;
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(150px, 200px));
+justify-content: center;
+gap: 1rem;
+padding: 1rem;
+}
+
+/*------------------------------
+   MANGA capitulos
+------------------------------*/
+
+/* Encabezado de capítulos */
+.manga-chapters-title {
+  font-size: 1.5rem;
+  margin: 1.5rem 0 0.75rem;
+  text-align: center;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+
+
+/* Cada cajita de capítulo */
+.capitulo-card {
+  background-color: orange;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0;       /* altura mayor, texto centrado */
+  border-radius: 8px;
+  font-size: 1.25rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.capitulo-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* Asegura que el número centrado no se desplace */
+.capitulo-card p {
+  margin: 0;
+  text-align: center;
+}
+
+/* ============================
+   ESTILOS SUB MENU DE MANGA
+============================ */
+/* === estilos de manga sub menu === */
+
+/* contenedor sticky bajo el header */
+
+/* === estilos de manga sub menu === */
+
+.chapter-submenu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(4px);
+  padding: 0.75rem 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* Botón volver */
+.chapter-submenu .sub-back {
+  background: none;
+  border: none;
+  color: #007ACC;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.4rem 0.8rem;
+}
+.chapter-submenu .sub-back:hover {
+  text-decoration: underline;
+}
+
+/* Hover para las cajitas de capítulos */
+.capitulo-card {
+  transition: background-color 0.2s, transform 0.15s ease;
+}
+.capitulo-card:hover {
+  background-color: #007ACC; /* azul acento */
+  transform: translateY(-2px);
+}
+.capitulo-card:hover p {
+  color: #fff;
+}
+
+
+/* etiqueta de capítulo */
+.chapter-label {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #333;
+}
+
+/* switch de vista */
+.view-switch {
+  display: flex;
+  gap: 0.5rem;
+}
+.view-btn {
+  background: none;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+  color: #333;
+}
+.view-btn.active {
+  background-color: #007ACC;
+  color: #fff;
+  border-color: #007ACC;
+}
+
+/* navegación capítulos */
+.chapter-nav {
+  display: flex;
+  gap: 0.5rem;
+}
+.chapter-nav button {
+  background-color: #007ACC;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s ease;
+}
+.chapter-nav button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.chapter-nav button:not(:disabled):hover {
+  transform: translateY(-1px);
+}
+
+/* separador antes del título de contenido */
+.chapter-submenu + h2 {
+  margin-top: 1.5rem;
+}
+
+/* ============================
+   ESTILOS BOTÓN VOLVER EN CAPÍTULOS
+/* === estilo para el botón de volver en capítulos === */
+.chap-back {
+  background-color: #007ACC;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.15s ease;
+  margin-bottom: 1rem; /* separa de los capítulos */
+}
+.chap-back:hover {
+  background-color: #005fa3;
+  transform: translateY(-1px);
+}
+
+
+
+/* ============================
+CARTAS (Anime, Manga, Capítulo)
+============================ */
+.anime-card,
+.manga-card,
+.capitulo-card {
+background: orange;
+border-radius: 8px;
+overflow: hidden;
+box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+cursor: pointer;
+transition: transform 0.3s;
+text-align: center;
+max-width: 200px;
+}
+.anime-card:hover,
+.manga-card:hover,
+.capitulo-card:hover {
+transform: translateY(-5px);
+}
+.anime-card img,
+.manga-card img,
+.capitulo-card img {
+width: 100%;
+display: block;
+}
+
+/* ============================
+INFO ANIME (Portada + Ficha)
+============================ */
+/* ---------------------
+   Ficha técnica arriba
+--------------------- */
+.info-anime {
+display: flex;
+gap: 1rem;
+background-color: #bebbbb;    /* gris muy claro */
+padding: 1rem;
+border-radius: 8px;
+margin-top: 0rem;
+margin-bottom: 1rem;
+align-items: flex-start;
+}
+.info-portada img {
+width: 200px;
+border-radius: 4px;
+}
+.info-datos {
+text-align: left;
+}
+.info-datos h2 {
+margin-bottom: 0.5rem;
+}
+.info-datos p {
+margin: 0.25rem 0;
+}
+.info-datos .descripcion {
+margin-top: 0.5rem;
+}
+
+/* ============================
+LAYOUT REPRODUCTOR: 3 COLUMNAS
+============================ */
+.player-container {
+  display: grid;
+  grid-template-columns: 200px 1fr 200px;
+  grid-template-rows: 1fr;   /* 1 fila que ocupe todo el alto */
+  gap: 1rem;
+  height: calc(100vh -  /* alto de header + alto de ficha */ 200px);
+  /* ajusta esos 200px a la suma real de tu header + .info-anime */
+}
+
+.player-container > * {
+  /* que cada panel llene su celda por completo */
+  height: 100%;
+  overflow: auto;   /* scroll interno si el contenido sobrepasa */
+}
+
+/* si tenés align-items, elimínalo o substitúyelo: */
+.player-container {
+  /* ... */
+  /* quita esto: align-items: start; */
+  align-items: stretch;  /* estira items para llenar la fila */
+}
+
+
+/* ============================
+SELECTOR DE IDIOMA
+============================ */
+#idioma-selector {
+display: flex;
+justify-content: center;
+gap: 1rem;
+margin-bottom: 0.5rem;
+}
+.idioma-btn {
+padding: 0.5rem 1rem;
+border: none;
+border-radius: 4px;
+background: #ccc;
+cursor: pointer;
+transition: background 0.2s;
+}
+.idioma-btn.activo {
+background: orange;
+color: white;
+}
+
+/* frontend/style.css */
+/* agregá este bloque dentro de la sección del reproductor, por ejemplo debajo de #idioma-selector */
+
+#server-selector {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.server-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  background: #ccc;
+  cursor: pointer;
+  transition: background 0.2s, opacity 0.2s;
+}
+
+.server-btn.activo {
+  background: #007acc;
+  color: #fff;
+}
+
+.server-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ============================
+COLUMNA IZQUIERDA: Scroll de capítulos
+============================ */
+.chapter-panel {
+background: #cef;
+border-radius: 8px;
+padding: 0.5rem;
+height: 60vh;
+display: flex;
+flex-direction: column;
+}
+.chapter-panel h3 {
+margin-bottom: 0.5rem;
+}
+.chapter-panel input {
+width: 100%;
+padding: 0.25rem;
+margin-bottom: 0.5rem;
+border-radius: 4px;
+border: 1px solid #999;
+}
+.chapter-list {
+flex: 1;
+overflow-y: auto;
+}
+.chapter-list ul {
+list-style: none;
+margin: 0;
+padding: 0;
+}
+.chapter-list li {
+padding: 0.25rem 0;
+cursor: pointer;
+}
+.chapter-list li.active {
+background: orange;
+color: #fff;
+border-radius: 4px;
+}
+.chapter-nav {
+display: flex;
+justify-content: space-between;
+margin-top: 0.5rem;
+}
+.chapter-nav button {
+width: 48%;
+}
+
+/* ============================
+VIDEO CENTRAL
+============================ */
+.video-panel {
+background: #ff8;
+border: 2px solid #f00;
+border-radius: 8px;
+padding: 0.5rem;
+}
+.video-panel iframe {
+width: 100%;
+height: 60vh;
+border: none;
+border-radius: 4px;
+}
+
+/* ============================
+COLUMNA DERECHA: Relaciones
+============================ */
+.sidebar-relations {
+background: #cef;
+border-radius: 8px;
+min-height: 60vh;
+padding: 0.5rem;
+}
+.sidebar-relations .rel-item {
+margin-bottom: 0.5rem;
+text-align: center;
+}
+.sidebar-relations .rel-item img {
+width: 100%;
+border-radius: 4px;
+}
+.sidebar-relations .rel-item p {
+margin-top: 0.25rem;
+font-size: 0.9rem;
+font-weight: bold;
+}
+
+/* ============================
+MODO CASCADA / CARRUSEL MANGA
+============================ */
+.cascade-mode img {
+width: 80%;
+max-width: 800px;
+margin: 10px auto;
+display: block;
+}
+.mode-switch {
+margin: 1rem 0;
+}
+.carousel-mode {
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 1rem;
+}
+.carousel-mode img {
+max-width: 800px;
+width: 80%;
+}
+.carousel-nav {
+display: flex;
+justify-content: center;
+gap: 2rem;
+font-size: 3rem;
+color: var(--color-primary);
+cursor: pointer;
+user-select: none;
+margin-top: 1rem;
+}
+.carousel-nav span:hover {
+color: #555;
+}
+
+/* ============================
+RESPONSIVE
+============================ */
+
+
+/* ============================
+   CONTENEDOR PRINCIPAL (Recientes + Estrenos)
+============================ */
+
+/* ============================= */
+/*          CONTENEDOR PRINCIPAL */
+/* ============================= */
+.actual {
+  margin-top: 100px;
+  display: flex;
+  height: 1300px;
+  padding: 0 1rem; /* padding solo a los costados */
+  box-sizing: border-box;
+  gap: 1rem; /* separa los hijos: #recientes y #estrenos */
+}
+
+/* ============================= */
+/*      SECCIÓN CAPÍTULOS RECIENTES */
+/* ============================= */
+#recientes {
+  flex: 0 0 85%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+#recientes-list {
+  flex: 1; /* ocupa el resto del espacio vertical en #recientes */
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 1.5rem;
+  box-sizing: border-box;
+}
+
+/* Tarjeta base recientes */
+#recientes-list > .recent-card {
+  position: relative;           /* para posicionar badge y nombre */
+  background-color: orange;
+  padding: 3px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Wrapper miniatura */
+#recientes-list > .recent-card .thumbnail-wrapper {
+  position: relative;
+}
+
+/* Imagen */
+#recientes-list > .recent-card .thumbnail-wrapper img {
+  width: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 8px;
+}
+
+/* Badge CAP XX arriba izquierda */
+#recientes-list > .recent-card .chapter-badge {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  background-color: #A4C639; /* verde manzana */
+  color: black;
+  padding: 2px 6px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  z-index: 30; /* más arriba que nombre */
+}
+
+/* Nombre oculto por defecto y aparece flotando abajo */
+#recientes-list > .recent-card p.anime-name {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  right: 5px;
+  background-color: #A4C639; /* verde manzana */
+  color: black;
+  border-radius: 4px;
+  border: 1px solid black;
+  padding: 0.3rem 0.5rem;
+  margin: 0;
+  font-weight: bold;
+  font-size: 1rem;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 20;
+}
+
+/* Mostrar nombre flotante al hacer hover */
+#recientes-list > .recent-card:hover p.anime-name {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Título "Capítulos Recientes" */
+#recientes h2 {
+  background-color: orange;
+  color: white;
+  padding: 5px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  border-radius: 8px;
+  margin: 0 0 0.5rem 0;
+}
+
+/* ============================= */
+/*          SECCIÓN ESTRENOS     */
+/* ============================= */
+#estrenos {
+  flex: 0 0 15%;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(0,0,0,0.8);
+  padding: 1rem;
+  border-radius: 8px;
+  box-sizing: border-box;
+  height: 100%;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: red rgba(0,0,0,0.2);
+}
+
+#estrenos-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* separación entre tarjetas */
+}
+
+#estrenos > h2 {
+  margin: 0 0 1rem;
+  padding: 0.75rem;
+  background-color: red;
+  color: #fff;
+  font-size: 1.25rem;
+  border-radius: 8px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* WebKit scrollbar */
+#estrenos::-webkit-scrollbar {
+  width: 8px;
+}
+#estrenos::-webkit-scrollbar-thumb {
+  background-color: red;
+  border-radius: 4px;
+}
+#estrenos::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.2);
+}
+
+/* Tarjetas estrenos */
+#estrenos .slide-card {
+  background-color: red;
+  padding: 3px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+  transition: transform 0.2s ease;
+  margin: 0; /* evitar conflicto con gap */
+  position: relative; /* para nombre flotante */
+  overflow: hidden;
+}
+#estrenos .slide-card:hover {
+  transform: scale(1.03);
+}
+
+#estrenos .slide-card img {
+  width: 100%;
+  border-radius: 4px;
+  object-fit: cover;
+  margin-bottom: 0.5rem;
+}
+
+/* Nombre oculto por defecto y aparece flotando abajo */
+#estrenos .slide-card p.anime-name {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  right: 5px;
+  background-color: #A4C639; /* verde manzana */
+  color: black;
+  border-radius: 4px;
+  border: 1px solid black;
+  padding: 0.3rem 0.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  margin: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 20;
+}
+
+#estrenos .slide-card:hover p.anime-name {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================= */
+/*          SECCIÓN AGREGADOS     */
+/* ============================= */
+#agregados {
+  padding: 1rem;
+  background-color: #f4f4f4;
+  border-radius: 8px;
+}
+
+#agregados > h2 {
+  text-align: center;
+  margin: 0 0 1rem;
+  font-size: 1.5rem;
+  background-color: #007acc;
+  color: #fff;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+/* Contenedor interno para tarjetas agregados */
+#agregados-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 1rem;
+  max-height: 520px; /* 2 filas aprox */
+  overflow: hidden;
+}
+
+/* Tarjetas agregados */
+#agregados .slide-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: blue;
+  border-radius: 4px;
+  padding: 3px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+  position: relative; /* para nombre flotante */
+  overflow: hidden;
+}
+#agregados .slide-card:hover {
+  transform: scale(1.03);
+}
+
+#agregados .slide-card img {
+  width: 100%;
+  border-radius: 4px;
+  object-fit: cover;
+  margin-bottom: 0.5rem;
+}
+
+/* Nombre oculto por defecto y aparece flotando abajo */
+#agregados .slide-card p.anime-name {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  right: 5px;
+  background-color: #A4C639; /* verde manzana */
+  color: black;
+  border-radius: 4px;
+  border: 1px solid black;
+  padding: 0.3rem 0.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  margin: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 20;
+}
+
+/* Mostrar nombre flotante al hacer hover */
+#agregados .slide-card:hover p.anime-name {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================= */
+/*      ESTILIS PARA HTML.LISTA */
+/* ============================= */
+
+#anime-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.anime-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  cursor: pointer;
+  overflow: hidden;
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.anime-card:hover {
+  transform: scale(1.03);
+}
+
+.anime-card img {
+  width: 100%;
+  height: auto;
+}
+
+.anime-card p {
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+/* ============================= */
+/*      FORMULARIO/FILTRO        */
+/* ============================= */
+.filtros-form {
+  margin-top: 4rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  align-items: flex-end;
+}
+
+.filtros-form input,
+.filtros-form select {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.filtros-form label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+}
+
+#filtro-buscar {
+  padding: 0.6rem 1rem;
+  background: #007acc;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+#filtro-buscar:hover {
+  background: #005fa3;
+}
+
+
+/* ============================
+RESPONSIVE LAYOUTS
+============================ */
+/* ============================
+RESPONSIVE LAYOUTS (FORZADO)
+============================ */
+
+/* ——— Vistas SPA ——— */
+/* Oculta Estrenos y Agregados en Manga y Lista */
+body.manga-view #estrenos,
+body.manga-view #agregados,
+body.list-view  #estrenos,
+body.list-view  #agregados {
+  display: none !important;
+}
+
+/* Sólo en Home mostramos Agregados */
+body.home-view #agregados {
+  display: block !important;
+}
+
+/* Oculta TODO el bloque .actual (Recientes + Estrenos) fuera de Home */
+body:not(.home-view) .actual {
+  display: none !important;
+}
+
+/* Asegurar que Estrenos sólo se vea en Home también */
+body:not(.home-view) #estrenos {
+  display: none !important;
+}
+
+
+
+/* ============================
+   RESPONSIVE LAYOUTS
+============================ */
+
+/* Mobile: up to 500px */
+@media (max-width: 500px) {
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    height: auto;
+  }
+  .header img {
+    width: 100px;
+    height: auto;
+  }
+  .actual {
+    margin-top: 135px;
+  }
+  #recientes {
+    padding-top: 0;
+  }
+  #recientes-list {
+    margin-top: 8px;
+  }
+  #estrenos,
+  #estrenos-list {
+    margin-top: 8px;
+  }
+  .search-container {
+    width: 90%;
+  }
+  .main-nav {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .main-nav .nav-link {
+    padding: 0.5rem 1rem;
+  }
+  #app {
+    padding-top: 0;
+  }
+
+  /* Estrenos y Agregados solo en Home */
+  body.home-view #estrenos,
+  body.home-view #agregados {
+    display: block !important;
+    clear: both !important;
+    width: 100% !important;
+    margin-top: 2rem !important;
+  }
+  body.home-view #estrenos-list,
+  body.home-view #agregados-list {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 1rem !important;
+  }
+}
+
+/* Mobile: up to 600px */
+@media (max-width: 600px) {
+  body {
+    padding: 0;
+  }
+  .header img {
+    width: 100px;
+    height: auto;
+  }
+  .actual {
+    display: block !important;
+    height: auto !important;
+    padding: 0 !important;
+  }
+  #recientes-list {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1rem !important;
+  }
+
+  /* Estrenos y Agregados solo en Home */
+  body.home-view #estrenos,
+  body.home-view #agregados {
+    display: block !important;
+    clear: both !important;
+    width: 100% !important;
+    margin-top: 2rem !important;
+  }
+  body.home-view #estrenos-list,
+  body.home-view #agregados-list {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 1rem !important;
+  }
+}
+
+/* Tablet: 601px to 1024px */
+@media (min-width: 601px) and (max-width: 1024px) {
+  body {
+    padding: 0;
+  }
+  .header img {
+    width: 120px;
+    height: auto;
+  }
+  .actual {
+    display: block !important;
+    height: auto !important;
+  }
+  #recientes-list {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 1rem !important;
+  }
+
+  /* Estrenos y Agregados solo en Home */
+  body.home-view #estrenos,
+  body.home-view #agregados {
+    display: block !important;
+    clear: both !important;
+    width: 100% !important;
+    margin-top: 2rem !important;
+  }
+  body.home-view #estrenos-list,
+  body.home-view #agregados-list {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 1rem !important;
+  }
+}
+
+/* Desktop: 1025px and above */
+@media (min-width: 1025px) {
+  body {
+    padding: 1rem;
+  }
+  .header img {
+    width: 150px;
+    height: auto;
+  }
+  .actual {
+    display: flex !important;
+    gap: 1rem !important;
+    height: 1050px !important;
+    overflow: hidden !important;
+  }
+  #recientes-list {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 1rem !important;
+    overflow-y: auto !important;
+  }
+  #estrenos {
+    flex: 0 0 15% !important;
+    max-width: 15% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow-y: auto !important;
+    gap: 1rem !important;
+  }
+  #estrenos-list {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1rem !important;
+  }
+  /* Agregados ocupa todo el ancho, debajo sólo en Home */
+  body.home-view #agregados {
+    flex: none !important;
+    width: 100% !important;
+    margin: 2rem 0 !important;
+    overflow: visible !important;
+  }
+  body.home-view #agregados-list {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)) !important;
+    gap: 1rem !important;
+  }
+}
+/* ============================
+   ESTILOS responsivos para los layout de Loa videos de Anime
+============================ */
+
+/* ============================
+   LAYOUT PLAYER-REPRODUCTOR
+   ============================ */
+
+/* Base: filas flexibles con prioridad de vídeo */
+.player-container {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 1rem;
+}
+
+/* ============================
+  PLAYER-CONTAINER RESPONSIVE
+  ============================ */
+
+
+/* 0–400px: en Info Anime, apilar portada y texto en columna */
+@media (max-width: 400px) {
+  .info-anime {
+    display: flex;           /* asegúrate de que es flex */
+    flex-direction: column;  /* apilar verticalmente */
+    gap: 0.5rem;               /* espacio entre portada y texto */
+  }
+  .info-anime img {
+    width: auto;             /* que la portada ocupe todo el ancho */
+    height: 100px;
+  }
+
+/* Fija un alto máximo y habilita scroll si hay más contenido */
+.chapter-panel {
+ height: 250px; /* alto fijo para la sidebar */
+  overflow-y: auto;     /* scroll vertical cuando sea necesario */
+  /* conserva tu padding si lo necesitas */
+  padding: 0.5rem;
+}
+
+}
+
+
+
+
+/* 0–500px: todos apilados y video con altura adecuada */
+
+/* 0–500px: todos apilados y video con altura 16:9 siempre correcta */
+@media (max-width: 500px) {
+
+#app {
+  margin: 140px  0px 0px; /* margen arriba para header fijo */
+  padding: 0px 15px; /* padding arriba para header fijo */
+  }
+
+  .player-container {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto auto auto !important;
+    gap: 1rem !important;
+  }
+  .chapter-panel,
+  .video-panel,
+  .sidebar-relations {
+    grid-column: 1 / -1 !important;
+  }
+
+  /* ratio 16:9 usando padding en el contenedor */
+  .video-panel {
+    position: relative !important;
+    width: 100% !important;
+    padding-top: 56.25% !important; /* 9/16 = 0.5625 */
+    height: 0 !important;
+    overflow: visible !important;    /* quita el scroll interno */
+  }
+  .video-panel iframe {
+    position: absolute !important;
+    top: 0; left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    border: none !important;
+  }
+}
+
+/* 501–1000px: cap + video en fila, sidebar abajo */
+@media (min-width: 501px) and (max-width: 1000px) {
+
+#app {
+  margin: 95px  0px 0px; /* margen arriba para header fijo */
+  padding: 0px 25px; /* padding arriba para header fijo */
+  }
+
+  .player-container {
+    display: grid !important;
+    grid-template-columns: 20% 80% !important;
+    grid-template-rows: auto auto !important;
+    gap: 1rem !important;
+  }
+
+.video-panel {
+    overflow: visible !important;    /* quita el scroll interno */
+  }
+
+  .sidebar-relations {
+    grid-column: 1 / -1 !important;
+  }
+}
+
+/* >1000px: vuelve al layout original de 3 columnas */
+@media (min-width: 1001px) {
+
+#app {
+   padding: 50px 16px 0 16px; /* margen arriba para header fijo */
+
+  }
+
+
+  .player-container {
+    display: grid !important;
+    grid-template-columns: 200px 1fr 200px !important;
+    grid-template-rows: 1fr !important;
+    gap: 1rem !important;
+  }
+}
+
